@@ -75,6 +75,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileHandler.cs" />
     <Compile Include="ListCountdown.cs" />
     <Compile Include="FormAddCountdown.cs">
       <SubType>Form</SubType>

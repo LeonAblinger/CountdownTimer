@@ -46,7 +46,6 @@
             // 
             // UI_ComboBox_CountdownChooser
             // 
-            this.UI_ComboBox_CountdownChooser.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.UI_ComboBox_CountdownChooser.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UI_ComboBox_CountdownChooser.Location = new System.Drawing.Point(197, 63);
             this.UI_ComboBox_CountdownChooser.MaxDropDownItems = 20;
