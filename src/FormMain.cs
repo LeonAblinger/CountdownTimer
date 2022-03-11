@@ -21,6 +21,7 @@ namespace CountdownTimer
         private readonly Control control;
         private readonly FormAddCountdown AddCountdownForm = new FormAddCountdown();
         private readonly ListCountdown CountdownList = new ListCountdown();
+        private readonly FileHandler SettingsFile = new FileHandler();
         private DateTime dT_SelectedGoal = DateTime.Now;
 
         public FormMain()
@@ -58,13 +59,18 @@ namespace CountdownTimer
             TimeSpan tS_Diff = dT_SelectedGoal - dT_Now;
             String labText = "";
 
-            if (tS_Diff.TotalMilliseconds < 0) labText = "CountdownTimer";
-
-            labText += tS_Diff.Days > 0 ? tS_Diff.Days.ToString() + " Tage  " : "";
-            labText += tS_Diff.Hours < 10 ? "0" + tS_Diff.Hours.ToString() + ":" : tS_Diff.Hours.ToString() + ":";
-            labText += tS_Diff.Minutes < 10 ? "0" + tS_Diff.Minutes.ToString() + ":" : tS_Diff.Minutes.ToString() + ":";
-            labText += tS_Diff.Seconds < 10 ? "0" + tS_Diff.Seconds.ToString() + ":" : tS_Diff.Seconds.ToString() + ".";
-            labText += tS_Diff.Milliseconds < 10 ? "00" + tS_Diff.Milliseconds.ToString() : tS_Diff.Milliseconds < 100 ? "0" + tS_Diff.Milliseconds.ToString() : tS_Diff.Milliseconds.ToString();
+            if (tS_Diff.TotalMilliseconds < 0)
+            {
+                labText = "CountdownTimer";
+            }
+            else
+            {
+                labText += tS_Diff.Days > 0 ? tS_Diff.Days.ToString() + " Tage  " : "";
+                labText += tS_Diff.Hours < 10 ? "0" + tS_Diff.Hours.ToString() + ":" : tS_Diff.Hours.ToString() + ":";
+                labText += tS_Diff.Minutes < 10 ? "0" + tS_Diff.Minutes.ToString() + ":" : tS_Diff.Minutes.ToString() + ":";
+                labText += tS_Diff.Seconds < 10 ? "0" + tS_Diff.Seconds.ToString() + ":" : tS_Diff.Seconds.ToString() + ".";
+                labText += tS_Diff.Milliseconds < 10 ? "00" + tS_Diff.Milliseconds.ToString() : tS_Diff.Milliseconds < 100 ? "0" + tS_Diff.Milliseconds.ToString() : tS_Diff.Milliseconds.ToString();
+            }
 
             control.BeginInvoke((MethodInvoker)delegate ()
             {
@@ -100,7 +106,9 @@ namespace CountdownTimer
 
         private void CountdownAdded(object sender, EventArgs e)
         {
-            CountdownList.Add(AddCountdownForm.Get());
+            Countdown AddedCountdown = AddCountdownForm.Get();
+            CountdownList.Add(AddedCountdown);
+            SettingsFile.Add(AddedCountdown);
             UI_ComboBox_CountdownChooser.Items.Clear();
             UI_ComboBox_CountdownChooser.Items.AddRange(CountdownList.GetNames());
         }
