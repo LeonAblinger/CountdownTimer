@@ -4,7 +4,7 @@ File:       FormMain.cs
 Author:     Leon Ablinger / AblL
 Version:    1.0.0.2
 Created:    08/03/2022
-Updated:    10/03/2022
+Updated:    11/03/2022
 
 Copyright (c) 2022 - Leon Ablinger / AblL
 ****************************************************************************************************************************/
@@ -35,6 +35,9 @@ namespace CountdownTimer
             this.UI_ComboBox_CountdownChooser.SelectedValueChanged += new EventHandler(this.UI_ComboBox_CountdownChooser_SelectedValueChanged);
             this.UI_Button_Add.Click += new EventHandler(this.UI_Button_Add_Click);
             AddCountdownForm.CountdownAdded += new EventHandler(this.CountdownAdded);
+
+            CountdownList.AddMultiple(SettingsFile.ReadCountdowns());
+            UI_ComboBox_CountdownChooser_Update();
 
             Thread update = new Thread(FormMainApp);
             update.Start();
@@ -109,6 +112,11 @@ namespace CountdownTimer
             Countdown AddedCountdown = AddCountdownForm.Get();
             CountdownList.Add(AddedCountdown);
             SettingsFile.Add(AddedCountdown);
+            UI_ComboBox_CountdownChooser_Update();
+        }
+
+        private void UI_ComboBox_CountdownChooser_Update()
+        {
             UI_ComboBox_CountdownChooser.Items.Clear();
             UI_ComboBox_CountdownChooser.Items.AddRange(CountdownList.GetNames());
         }

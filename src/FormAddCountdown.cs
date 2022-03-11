@@ -4,7 +4,7 @@ File:       FormAddCountdown.cs
 Author:     Leon Ablinger / AblL
 Version:    1.0.0.2
 Created:    08/03/2022
-Updated:    10/03/2022
+Updated:    11/03/2022
 
 Copyright (c) 2022 - Leon Ablinger / AblL
 ****************************************************************************************************************************/
